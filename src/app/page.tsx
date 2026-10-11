@@ -12,6 +12,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { faq } from "@/content/home";
 import { site } from "@/content/site";
 import { publicEnv } from "@/lib/env/public";
+import { leadsLocked } from "@/lib/env/server";
 
 export default function HomePage() {
   const url = publicEnv.NEXT_PUBLIC_SITE_URL;
@@ -58,7 +59,7 @@ export default function HomePage() {
       <Audience />
       <Comparison />
       <Faq items={faq} />
-      <BookSection hasCalendly={hasCalendly} />
+      <BookSection hasCalendly={hasCalendly} locked={leadsLocked} />
       <StickyCta />
     </>
   );

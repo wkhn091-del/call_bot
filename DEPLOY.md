@@ -28,6 +28,8 @@ npm run test:e2e   # Playwright, מעלה שרת על פורט 3200 עם LEAD_DE
 | `SENTRY_DSN` | חובה | רשות | - | פרויקט Next.js ב-Sentry. רק בצד השרת, ולכן בלי `NEXT_PUBLIC_` |
 | `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY` | מומלץ | מומלץ | - | `openssl rand -base64 32`. מונע שבירת טפסים פתוחים בזמן פריסה חדשה |
 
+**מצב נעול.** כל עוד חסר ב-Production אחד מהמשתנים שמסומנים "חובה", או ש-`LEAD_DELIVERY_MODE` אינו `live`, האתר עולה, אבל טופס הדמו מוחלף בכרטיס "תיאום דרך האתר ייפתח בקרוב" והשרת מסרב לכל שליחה. ב-Runtime Logs מופיעה השורה `[env] Lead form locked. Missing: ...` עם שמות המשתנים החסרים. אחרי שמוסיפים אותם צריך לעשות Redeploy. הכרטיס מציג טלפון, מייל או Calendly רק אם מילאתם אותם (`site.contact` ב-`src/content/site.ts`, או `NEXT_PUBLIC_CALENDLY_URL`).
+
 ## HubSpot
 ליצור ב-Contacts את ה-properties הבאים (Settings → Properties) לפני העלייה, אחרת ה-upsert ייכשל:
 

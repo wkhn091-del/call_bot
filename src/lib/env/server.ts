@@ -44,13 +44,6 @@ const serverEnvSchema = z
       .optional(),
   })
   .superRefine((env, ctx) => {
-    if (env.VERCEL_ENV === "production") {
-      for (const key of ["UPSTASH_REDIS_REST_URL", "TURNSTILE_SECRET_KEY", "NEXT_PUBLIC_TURNSTILE_SITE_KEY", "SENTRY_DSN"] as const) {
-        if (!env[key]) {
-          ctx.addIssue({ code: "custom", path: [key], message: `${key} is required in production.` });
-        }
-      }
-    }
     if (Boolean(env.UPSTASH_REDIS_REST_URL) !== Boolean(env.UPSTASH_REDIS_REST_TOKEN)) {
       ctx.addIssue({
         code: "custom",
@@ -65,14 +58,8 @@ const serverEnvSchema = z
         message: "TURNSTILE_SECRET_KEY and NEXT_PUBLIC_TURNSTILE_SITE_KEY must be set together.",
       });
     }
-    if (env.VERCEL_ENV === "production" && env.LEAD_DELIVERY_MODE !== "live") {
-      ctx.addIssue({
-        code: "custom",
-        path: ["LEAD_DELIVERY_MODE"],
-        message: "Production must deliver leads live; console mode is for local development only.",
-      });
-    }
-    if (env.LEAD_DELIVERY_MODE === "live") {
+    // In production a missing channel locks the form instead (see `missingForLeads`).
+    if (env.LEAD_DELIVERY_MODE === "live" && env.VERCEL_ENV !== "production") {
       for (const key of ["HUBSPOT_PRIVATE_APP_TOKEN", "SLACK_WEBHOOK_URL"] as const) {
         if (!env[key]) {
           ctx.addIssue({ code: "custom", path: [key], message: `${key} is required when LEAD_DELIVERY_MODE=live.` });
@@ -106,3 +93,30 @@ function parseServerEnv(): ServerEnv {
 }
 
 export const serverEnv: ServerEnv = parseServerEnv();
+
+const REQUIRED_FOR_LEADS_IN_PRODUCTION = [
+  "UPSTASH_REDIS_REST_URL",
+  "TURNSTILE_SECRET_KEY",
+  "NEXT_PUBLIC_TURNSTILE_SITE_KEY",
+  "SENTRY_DSN",
+  "HUBSPOT_PRIVATE_APP_TOKEN",
+  "SLACK_WEBHOOK_URL",
+] as const;
+
+/** Names only, never values: this list is logged at boot. */
+export function missingForLeads(env: ServerEnv): string[] {
+  if (env.VERCEL_ENV !== "production") return [];
+  const missing: string[] = REQUIRED_FOR_LEADS_IN_PRODUCTION.filter((key) => !env[key]);
+  if (env.LEAD_DELIVERY_MODE !== "live") missing.push("LEAD_DELIVERY_MODE=live");
+  return missing;
+}
+
+const missingInProduction = missingForLeads(serverEnv);
+
+/**
+ * Production without rate limiting, bot checks, monitoring or a live delivery channel: the site still renders,
+ * but both lead actions refuse every submission before reading it, and the booking form is not rendered.
+ */
+export const leadsLocked = missingInProduction.length > 0;
+
+if (leadsLocked) console.warn(`[env] Lead form locked. Missing: ${missingInProduction.join(", ")}`);

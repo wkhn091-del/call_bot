@@ -1,12 +1,19 @@
 "use client";
 
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
+import Image from "next/image";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { demoCalls, type DemoCall } from "@/content/calls";
 import { track } from "@/lib/analytics/track";
 import { duration, ease, spring } from "@/lib/motion/tokens";
 
 export const INDUSTRY_STORAGE_KEY = "cb_industry";
+
+const SCENES: Record<DemoCall["id"], string> = {
+  garage: "/scenes/garage.webp",
+  clinic: "/scenes/clinic.webp",
+  realestate: "/scenes/realestate.webp",
+};
 
 const SPEAK_MS = { bot: 650, caller: 500 } as const;
 const READ_MS_PER_CHAR = 17;
@@ -172,6 +179,26 @@ export function CallDemo() {
 
         <div ref={panelRef} id="demo-panel" role="tabpanel" className="mt-12 grid gap-6 lg:grid-cols-12">
           <div className="overflow-hidden rounded-panel border border-night-700 bg-night-950 shadow-panel lg:col-span-7">
+            <div className="relative h-32 overflow-hidden md:h-40" aria-hidden="true">
+              <AnimatePresence initial={false}>
+                <motion.div
+                  key={call.id}
+                  className="absolute inset-0"
+                  initial={reduce ? false : { opacity: 0, scale: 1.04 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <Image src={SCENES[call.id]} alt="" fill sizes="(min-width: 1024px) 700px, 100vw" className="object-cover"
+                    style={{ objectPosition: "30% 75%" }}
+                  />
+                </motion.div>
+              </AnimatePresence>
+              <div className="absolute inset-0 bg-linear-to-t from-night-950 via-night-950/40 to-transparent" />
+              <span className="absolute end-3 top-3 rounded-chip bg-night-950/70 px-2 py-0.5 text-micro text-mist-400 backdrop-blur-sm">
+                הדמיה
+              </span>
+            </div>
             <div className="flex items-center justify-between gap-4 border-b border-night-700 px-5 py-4">
               <div className="min-w-0">
                 <p className="truncate text-small font-semibold text-mist-100">{call.business}</p>

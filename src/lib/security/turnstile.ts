@@ -19,7 +19,7 @@ const verifySchema = z.object({
 
 /**
  * Without a secret (local development, CI) verification is skipped. Production cannot reach that
- * branch: the server env schema requires TURNSTILE_SECRET_KEY when VERCEL_ENV=production.
+ * branch: without TURNSTILE_SECRET_KEY `leadsLocked` is true and both lead actions return before calling this.
  * Fails closed: if Cloudflare is unreachable the submission is rejected and reported.
  */
 export async function verifyTurnstile(formData: FormData, expectedAction: string, ip: string): Promise<boolean> {

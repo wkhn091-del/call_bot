@@ -12,7 +12,7 @@ export const hero = {
     { icon: "price", title: "תמחור לפי שיחה", body: "בלי מנוי חודשי קבוע" },
   ] as const,
   imageAlt: "הדמיה: מוסך סגור בלילה, וטלפון שמצלצל על שולחן העבודה",
-  disclaimer: "הדמיה. שמות העסק והלקוח בדויים.",
+  disclaimer: "התמונה היא הדמיה.",
 };
 
 /** Illustrative caller lines, not quotes from real customers. The label on screen says so. */

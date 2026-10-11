@@ -17,7 +17,7 @@
 | Cloudflare Turnstile | `src/lib/security/turnstile.ts`, `TurnstileField.tsx` | בוטים מבוססי דפדפן. השרת מאמת את הטוקן מול Cloudflare, ובודק שה-action תואם לשלב (`demo_step1`/`demo_step2`). נכשל בצורה סגורה: אם Cloudflare לא עונה, השליחה נדחית | אדם אמיתי ששולח ספאם ידני. הטוקן חד-פעמי והווידג'ט מתאפס אחרי כל תשובה מהשרת |
 | ולידציית Zod | `src/lib/leads/schema.ts`, `actions.ts` | קלט חריג: אורכים, תווים, מיילים חינמיים, טלפון לא ישראלי, ערכי enum לא מוכרים | - |
 | מגבלת גוף בקשה | `next.config.ts`, `bodySizeLimit: 64kb` | שליחת גוף ענק ל-Server Action כדי להעמיס על השרת | - |
-| ולידציית env | `src/lib/env/server.ts` | עלייה לפרודקשן בלי Turnstile, Upstash, Sentry או מסירה חיה. השרת לא עולה בכלל | ערך נכון בפורמט אבל שגוי בתוכן (מפתח של חשבון אחר) |
+| ולידציית env | `src/lib/env/server.ts` | ערך בפורמט שגוי: השרת לא עולה בכלל. פרודקשן בלי Turnstile, Upstash, Sentry, HubSpot, Slack או `LEAD_DELIVERY_MODE=live`: מצב נעול (`leadsLocked`). האתר מוצג, הטופס לא מוצג, ושתי ה-Server Actions מחזירות שגיאה לפני שהן קוראות שדה כלשהו. שמות המפתחות החסרים (בלי ערכים) נרשמים ב-Runtime Logs | ערך נכון בפורמט אבל שגוי בתוכן (מפתח של חשבון אחר) |
 | Sentry בלי PII | `src/instrumentation.ts`, `src/lib/observability/report.ts` | דליפת פרטי לידים לכלי ניטור: בלי עוגיות, headers, גוף בקשה, query, משתני stack או user. דיווחי חסימה מוגבלים לאחד בדקה לכל סוג, כדי שהצפה לא תשרוף את המכסה | - |
 | עוגיית עמוד התודה | `actions.ts` | `HttpOnly`, `Secure`, `SameSite=Lax`, נתיב `/thank-you` בלבד, 30 דקות. העמוד `no-store` כדי שלא יישמר במטמון משותף | - |
 | Source maps | `productionBrowserSourceMaps: false` | חשיפת קוד המקור בדפדפן | - |

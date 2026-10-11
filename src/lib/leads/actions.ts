@@ -3,6 +3,7 @@
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { leadsLocked } from "@/lib/env/server";
 import { reportBlocked, reportError } from "@/lib/observability/report";
 import { isSameOrigin } from "@/lib/security/origin";
 import { hashKey, rateLimit } from "@/lib/security/rate-limit";
@@ -22,6 +23,8 @@ const ONE_HOUR = 60 * 60_000;
 const GENERIC_ERROR = "משהו השתבש אצלנו בשליחה. אפשר לנסות שוב בעוד רגע.";
 const RATE_ERROR = "נשלחו הרבה בקשות מהחיבור הזה. אפשר לנסות שוב בעוד כמה דקות.";
 const BOT_ERROR = "לא הצלחנו לוודא שהשליחה הגיעה מדפדפן. אפשר לרענן את העמוד ולנסות שוב.";
+const LOCKED_ERROR = "תיאום הדמו דרך האתר עוד לא פתוח. הפרטים לא נשלחו ולא נשמרו.";
+const LOCKED: FormState = { status: "error", errors: {}, message: LOCKED_ERROR };
 
 const metaSchema = z.object({
   website: z.string().max(0).optional(),
@@ -67,6 +70,7 @@ function looksAutomated(meta: z.infer<typeof metaSchema>): boolean {
 }
 
 export async function submitStepOne(_previous: FormState, formData: FormData): Promise<FormState> {
+  if (leadsLocked) return LOCKED;
   const request = await requestInfo();
   if (!request.sameOrigin) {
     reportBlocked("origin", "step1");
@@ -94,6 +98,7 @@ export async function submitStepOne(_previous: FormState, formData: FormData): P
 }
 
 export async function submitLead(_previous: FormState, formData: FormData): Promise<FormState> {
+  if (leadsLocked) return LOCKED;
   const request = await requestInfo();
   if (!request.sameOrigin) {
     reportBlocked("origin", "lead");

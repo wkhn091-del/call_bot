@@ -328,6 +328,84 @@ summary::-webkit-details-marker {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/*
+ * Hero stage: reproduces object-cover with object-position 30% 65% on a 16:9 box,
+ * so overlays placed in image percentages (the phone) stay on the phone at any viewport.
+ */
+.hero-frame {
+  container-type: size;
+}
+
+.hero-stage {
+  --stage-w: max(100cqw, 177.78cqh);
+  position: absolute;
+  width: var(--stage-w);
+  aspect-ratio: 16 / 9;
+  left: calc((100cqw - var(--stage-w)) * 0.3);
+  top: calc((100cqh - var(--stage-w) * 0.5625) * 0.65);
+}
+
+.hero-phone {
+  position: absolute;
+  left: 32.2%;
+  top: 76.9%;
+  width: 0;
+  height: 0;
+}
+
+.hero-ring {
+  position: absolute;
+  inset: -3.5rem;
+  border-radius: 9999px;
+  border: 1.5px solid var(--color-teal-400);
+  opacity: 0;
+  animation: hero-ring 1.6s var(--ease-out, ease-out) 3 both;
+}
+
+.hero-ring:nth-child(2) {
+  animation-delay: 0.45s;
+}
+
+@keyframes hero-ring {
+  from {
+    transform: scale(0.35);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.hero-answered {
+  position: absolute;
+  bottom: 3.25rem;
+  left: 50%;
+  white-space: nowrap;
+  translate: -50% 0;
+  animation: hero-answered 0.6s var(--ease-out, ease-out) 5s both;
+}
+
+@keyframes hero-answered {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-ring {
+    animation: none;
+  }
+  .hero-answered {
+    animation: none;
+  }
+}
+
 /* A30 stacking cards: each card sticks a little lower than the previous one, so they pile up while scrolling. */
 .stack-card {
   position: sticky;
