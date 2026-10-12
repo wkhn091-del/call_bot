@@ -1,9 +1,11 @@
 export const hero = {
   eyebrowTime: "21:40",
   eyebrow: "העסק סגור",
-  title: "CALLBOT עונה במקומכם",
-  subtitle: "קובע תור ושולח ל-CRM. משלמים לפי שיחה.",
-  cta: "לתיאום דמו של 15 דקות",
+  /** Ghost word behind the H1 — atmosphere only, aria-hidden in the component. */
+  ghostWord: "21:40",
+  title: "השיחה שלא עניתם עליה כבר הלכה",
+  subtitle: "בערב ובסופ״ש CALLBOT עונה בעברית, קובע תור ושולח ליד ל-Monday או Powerlink.",
+  cta: "לדמו של 15 דקות",
   secondary: "לראות שיחה לדוגמה",
   facts: [
     { icon: "voice", title: "עברית מדוברת", body: "כולל סלנג, מבטאים וקיצורים" },
