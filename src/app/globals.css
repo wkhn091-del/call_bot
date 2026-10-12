@@ -339,9 +339,14 @@ summary::-webkit-details-marker {
 
 @media (max-width: 767px) {
   .hero-title {
-    font-size: clamp(1.85rem, 6.8vw, 2.35rem);
-    line-height: 1.12;
-    max-width: 11ch;
+    font-size: clamp(1.9rem, 7.2vw, 2.4rem);
+    line-height: 1.1;
+    max-width: 12ch;
+  }
+
+  /* Soft seam between copy and character — one composition, not two stacked slabs */
+  .hero-copy {
+    background: linear-gradient(to bottom, rgb(12 12 22 / 0.55) 0%, rgb(12 12 22 / 0.2) 70%, transparent 100%);
   }
 }
 
@@ -383,14 +388,21 @@ summary::-webkit-details-marker {
     position: absolute;
     inset: 0;
     z-index: 2;
-    background: linear-gradient(to top, transparent 48%, rgb(12 12 22 / 0.55) 82%, rgb(12 12 22 / 0.92) 100%);
+    /* Lighter top fade so the robot sits closer under the CTA */
+    background: linear-gradient(to top, transparent 55%, rgb(12 12 22 / 0.35) 88%, rgb(12 12 22 / 0.72) 100%);
     pointer-events: none;
   }
 
   .hero-character__stage {
-    /* Slightly larger presence on phones without crowding the copy */
-    transform: scale(1.08);
+    transform: scale(1.12) translateY(4%);
     transform-origin: bottom center;
+  }
+
+  .hero-character__glow {
+    inset: 28% 8% 0;
+    background:
+      radial-gradient(ellipse at 50% 72%, rgb(78 205 196 / 0.34), transparent 60%),
+      radial-gradient(ellipse at 50% 100%, rgb(0 0 0 / 0.35), transparent 55%);
   }
 }
 
