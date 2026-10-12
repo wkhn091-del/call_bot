@@ -1,9 +1,8 @@
 export const hero = {
   eyebrowTime: "21:40",
-  eyebrow: "העסק סגור. הטלפון ממשיך לצלצל.",
-  title: "כשאתם לא עונים לטלפון CALLBOT עונה במקומכם וקובע את הפגישה",
-  subtitle:
-    "בוט קולי שמנהל שיחה אמיתית בעברית כולל סלנג ומבטאים. אוסף את הפרטים קובע תור ושולח את הליד ישר ל-Monday או ל-Powerlink. משלמים לפי שיחה בלי מנוי חודשי קבוע.",
+  eyebrow: "העסק סגור",
+  title: "CALLBOT עונה במקומכם",
+  subtitle: "קובע תור ושולח ל-CRM. משלמים לפי שיחה.",
   cta: "לתיאום דמו של 15 דקות",
   secondary: "לראות שיחה לדוגמה",
   facts: [
@@ -12,7 +11,7 @@ export const hero = {
     { icon: "price", title: "תמחור לפי שיחה", body: "בלי מנוי חודשי קבוע" },
   ] as const,
   imageAlt: "הדמיה: CALLBOT עונה לשיחה בטלפון בשם העסק, בלילה",
-  disclaimer: "הדמיה. הדמות והסצנה להמחשה בלבד.",
+  disclaimer: "הדמיה להמחשה בלבד.",
 };
 
 /** Illustrative caller lines, not quotes from real customers. The label on screen says so. */
@@ -36,9 +35,8 @@ export const nightVoices = {
 export const commitments = {
   /** Short form for the line under the hero CTA. The last item depends on whether Calendly is connected. */
   ctaNote: (hasCalendly: boolean) => [
-    "7 ימי ניסיון בחינם",
-    "ההתקנה והחיבור ל-CRM עלינו",
-    hasCalendly ? "בוחרים מועד לדמו מיד אחרי הטופס" : "חוזרים אליכם עד יום העסקים הבא",
+    "7 ימי ניסיון",
+    hasCalendly ? "בוחרים מועד מיד" : "חוזרים עד יום עסקים",
   ],
   items: [
     {

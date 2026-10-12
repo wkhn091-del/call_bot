@@ -330,17 +330,18 @@ summary::-webkit-details-marker {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Hero title: a step under global display so the copy doesn't overpower the character. */
+/* Hero title: brand-forward, compact enough for one mobile viewport with the character. */
 .hero-title {
-  font-size: clamp(1.75rem, 1.2rem + 2.2vw, 3.05rem);
-  line-height: 1.12;
-  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 1.35rem + 2.6vw, 3.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
 }
 
 @media (max-width: 767px) {
   .hero-title {
-    font-size: clamp(1.625rem, 1.15rem + 3.2vw, 2.15rem);
-    line-height: 1.18;
+    font-size: clamp(1.85rem, 6.8vw, 2.35rem);
+    line-height: 1.12;
+    max-width: 11ch;
   }
 }
 
@@ -352,20 +353,19 @@ summary::-webkit-details-marker {
 
 @media (min-width: 768px) {
   .hero-character {
-    /* Keep the figure inside its column so the arm never covers the copy */
     overflow: hidden;
-    padding-inline-start: 0.5rem;
+    padding-inline-start: 0.75rem;
   }
 }
 
 .hero-character__glow {
   position: absolute;
-  inset: 18% 10% 5%;
+  inset: 22% 12% 0;
   z-index: 0;
   background:
-    radial-gradient(ellipse at 48% 78%, rgb(78 205 196 / 0.32), transparent 58%),
-    radial-gradient(ellipse at 50% 100%, rgb(0 0 0 / 0.45), transparent 55%);
-  filter: blur(10px);
+    radial-gradient(ellipse at 50% 80%, rgb(78 205 196 / 0.3), transparent 58%),
+    radial-gradient(ellipse at 50% 100%, rgb(0 0 0 / 0.4), transparent 55%);
+  filter: blur(12px);
   pointer-events: none;
 }
 
@@ -373,9 +373,8 @@ summary::-webkit-details-marker {
   position: relative;
   z-index: 1;
   overflow: hidden;
-  /* Soft dissolve at the cropped waist so the figure merges into the night ground */
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
 }
 
 @media (max-width: 767px) {
@@ -383,15 +382,21 @@ summary::-webkit-details-marker {
     content: "";
     position: absolute;
     inset: 0;
-    z-index: 1;
-    background: linear-gradient(to top, transparent 42%, rgb(12 12 22 / 0.45) 78%, rgb(12 12 22 / 0.9) 100%);
+    z-index: 2;
+    background: linear-gradient(to top, transparent 48%, rgb(12 12 22 / 0.55) 82%, rgb(12 12 22 / 0.92) 100%);
     pointer-events: none;
+  }
+
+  .hero-character__stage {
+    /* Slightly larger presence on phones without crowding the copy */
+    transform: scale(1.08);
+    transform-origin: bottom center;
   }
 }
 
 .hero-character__img {
   animation: hero-float 7s var(--ease-out, ease-out) infinite alternate;
-  filter: drop-shadow(0 36px 48px rgb(0 0 0 / 0.65)) drop-shadow(0 0 36px rgb(78 205 196 / 0.22));
+  filter: drop-shadow(0 28px 42px rgb(0 0 0 / 0.6)) drop-shadow(0 0 28px rgb(78 205 196 / 0.2));
 }
 
 @keyframes hero-float {

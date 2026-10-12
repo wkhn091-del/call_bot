@@ -91,9 +91,9 @@ test.describe("טופס דמו", () => {
   test("Hero מציג את ההתחייבויות מתחת לכפתור, במסך הראשון במובייל", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto("/");
-    const note = page.getByText("7 ימי ניסיון בחינם").first();
+    const note = page.getByText("7 ימי ניסיון").first();
     await expect(note).toBeInViewport();
-    await expect(page.getByText("ההתקנה והחיבור ל-CRM עלינו")).toBeInViewport();
+    await expect(page.getByText("חוזרים עד יום עסקים")).toBeInViewport();
   });
 });
 
