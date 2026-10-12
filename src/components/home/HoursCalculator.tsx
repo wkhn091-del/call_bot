@@ -42,12 +42,13 @@ type SelectProps = {
   value: string;
   options: readonly { value: string; label: string }[];
   onChange: (value: string) => void;
+  className?: string;
 };
 
-function Select({ label, value, options, onChange }: SelectProps) {
+function Select({ label, value, options, onChange, className = "" }: SelectProps) {
   const id = useId();
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className={`flex flex-col justify-end gap-1.5 ${className}`}>
       <label htmlFor={id} className="text-micro text-mist-400">
         {label}
       </label>
@@ -166,7 +167,7 @@ export function HoursCalculator() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
           <div className="rounded-panel border border-night-700 bg-night-900 p-5 md:p-7 lg:col-span-7" data-reveal>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               <Select
                 label="פותחים ב־ (א׳ עד ה׳)"
                 value={String(hours.weekdayOpen)}
@@ -181,6 +182,7 @@ export function HoursCalculator() {
               />
               <Select
                 label="יום שישי"
+                className="col-span-2 sm:col-span-1"
                 value={hours.fridayClose === null ? "closed" : String(hours.fridayClose)}
                 options={fridayOptions}
                 onChange={(value) =>

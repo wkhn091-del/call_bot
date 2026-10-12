@@ -1,9 +1,9 @@
 export const hero = {
   eyebrowTime: "21:40",
   eyebrow: "העסק סגור. הטלפון ממשיך לצלצל.",
-  title: "כשאתם לא עונים לטלפון, CALLBOT עונה במקומכם וקובע את הפגישה.",
+  title: "כשאתם לא עונים לטלפון — CALLBOT עונה במקומכם וקובע את הפגישה",
   subtitle:
-    "בוט קולי שמנהל שיחה אמיתית בעברית, כולל סלנג ומבטאים. הוא אוסף את הפרטים, קובע תור ושולח את הליד ישר ל-Monday או ל-Powerlink. משלמים לפי שיחה, בלי מנוי חודשי קבוע.",
+    "בוט קולי שמנהל שיחה אמיתית בעברית כולל סלנג ומבטאים. אוסף את הפרטים קובע תור ושולח את הליד ישר ל-Monday או ל-Powerlink. משלמים לפי שיחה בלי מנוי חודשי קבוע.",
   cta: "לתיאום דמו של 15 דקות",
   secondary: "לראות שיחה לדוגמה",
   facts: [
@@ -11,8 +11,8 @@ export const hero = {
     { icon: "crm", title: "הליד נכנס ל-CRM", body: "Monday או Powerlink, בלי העתקות" },
     { icon: "price", title: "תמחור לפי שיחה", body: "בלי מנוי חודשי קבוע" },
   ] as const,
-  imageAlt: "הדמיה: מוסך סגור בלילה, וטלפון שמצלצל על שולחן העבודה",
-  disclaimer: "התמונה היא הדמיה.",
+  imageAlt: "הדמיה: CALLBOT עונה לשיחה בטלפון בשם העסק, בלילה",
+  disclaimer: "הדמיה. הדמות והסצנה להמחשה בלבד.",
 };
 
 /** Illustrative caller lines, not quotes from real customers. The label on screen says so. */

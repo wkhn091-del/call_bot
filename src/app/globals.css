@@ -3,14 +3,16 @@
 @custom-variant short (@media (max-height: 760px));
 
 @theme {
-  --color-night-950: #08080f;
-  --color-night-900: #0e0e1a;
-  --color-night-800: #1a1a2e;
-  --color-night-700: #24243c;
-  --color-night-600: #34344f;
-  --color-mist-500: #6f6f88;
-  --color-mist-400: #8b8ba3;
-  --color-mist-300: #b0b0c4;
+  /* Each surface step must stay visibly lighter than the one below it on a phone screen outdoors. */
+  --color-night-950: #0c0c16;
+  --color-night-900: #16162a;
+  --color-night-800: #20203a;
+  --color-night-700: #2d2d4a;
+  --color-night-600: #3e3e5e;
+  /* mist-500 is the dimmest text colour: at least 4.5:1 on night-900. */
+  --color-mist-500: #9393ab;
+  --color-mist-400: #a8a8be;
+  --color-mist-300: #c6c6d6;
   --color-mist-100: #ecebf3;
   --color-violet-700: #43205f;
   --color-violet-600: #5b2c82;
@@ -328,68 +330,127 @@ summary::-webkit-details-marker {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/*
- * Hero stage: reproduces object-cover with object-position 30% 65% on a 16:9 box,
- * so overlays placed in image percentages (the phone) stay on the phone at any viewport.
- */
-.hero-frame {
-  container-type: size;
+/* Hero title: a step under global display so the copy doesn't overpower the character. */
+.hero-title {
+  font-size: clamp(1.75rem, 1.2rem + 2.2vw, 3.05rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
 }
 
-.hero-stage {
-  --stage-w: max(100cqw, 177.78cqh);
-  position: absolute;
-  width: var(--stage-w);
-  aspect-ratio: 16 / 9;
-  left: calc((100cqw - var(--stage-w)) * 0.3);
-  top: calc((100cqh - var(--stage-w) * 0.5625) * 0.65);
+@media (max-width: 767px) {
+  .hero-title {
+    font-size: clamp(1.625rem, 1.15rem + 3.2vw, 2.15rem);
+    line-height: 1.18;
+  }
 }
 
-.hero-phone {
+/* Hero character: cutout sits on page atmosphere — no frame, soft ground blend. */
+.hero-character {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+@media (min-width: 768px) {
+  .hero-character {
+    /* Keep the figure inside its column so the arm never covers the copy */
+    overflow: hidden;
+    padding-inline-start: 0.5rem;
+  }
+}
+
+.hero-character__glow {
   position: absolute;
-  left: 32.2%;
-  top: 76.9%;
+  inset: 18% 10% 5%;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 48% 78%, rgb(78 205 196 / 0.32), transparent 58%),
+    radial-gradient(ellipse at 50% 100%, rgb(0 0 0 / 0.45), transparent 55%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.hero-character__stage {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  /* Soft dissolve at the cropped waist so the figure merges into the night ground */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+}
+
+@media (max-width: 767px) {
+  .hero-character::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to top, transparent 42%, rgb(12 12 22 / 0.45) 78%, rgb(12 12 22 / 0.9) 100%);
+    pointer-events: none;
+  }
+}
+
+.hero-character__img {
+  animation: hero-float 7s var(--ease-out, ease-out) infinite alternate;
+  filter: drop-shadow(0 36px 48px rgb(0 0 0 / 0.65)) drop-shadow(0 0 36px rgb(78 205 196 / 0.22));
+}
+
+@keyframes hero-float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+.hero-phone-mark {
+  /* Above the float transform on the image (transform creates a stacking context) */
+  z-index: 3;
   width: 0;
   height: 0;
 }
 
 .hero-ring {
   position: absolute;
-  inset: -3.5rem;
+  inset: -2.75rem;
   border-radius: 9999px;
   border: 1.5px solid var(--color-teal-400);
   opacity: 0;
-  animation: hero-ring 1.6s var(--ease-out, ease-out) 3 both;
+  animation: hero-ring 1.7s var(--ease-out, ease-out) infinite both;
 }
 
 .hero-ring:nth-child(2) {
-  animation-delay: 0.45s;
+  animation-delay: 0.55s;
+}
+
+.hero-ring:nth-child(3) {
+  animation-delay: 1.1s;
 }
 
 @keyframes hero-ring {
   from {
-    transform: scale(0.35);
-    opacity: 0.9;
+    transform: scale(0.3);
+    opacity: 0.85;
   }
   to {
-    transform: scale(1.6);
+    transform: scale(1.75);
     opacity: 0;
   }
 }
 
 .hero-answered {
   position: absolute;
-  bottom: 3.25rem;
-  left: 50%;
+  top: 0;
+  left: 0;
   white-space: nowrap;
-  translate: -50% 0;
-  animation: hero-answered 0.6s var(--ease-out, ease-out) 5s both;
+  translate: 0 -50%;
+  animation: hero-answered 0.65s var(--ease-out, ease-out) 1.8s both;
 }
 
 @keyframes hero-answered {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -398,9 +459,8 @@ summary::-webkit-details-marker {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-ring {
-    animation: none;
-  }
+  .hero-character__img,
+  .hero-ring,
   .hero-answered {
     animation: none;
   }
