@@ -18,9 +18,8 @@ const verifySchema = z.object({
 });
 
 /**
- * Without a secret (local development, CI) verification is skipped. Production cannot reach that
- * branch: without TURNSTILE_SECRET_KEY `leadsLocked` is true and both lead actions return before calling this.
- * Fails closed: if Cloudflare is unreachable the submission is rejected and reported.
+ * Without a secret (local / portfolio demo) verification is skipped.
+ * Fails closed when a secret is set: if Cloudflare is unreachable the submission is rejected and reported.
  */
 export async function verifyTurnstile(formData: FormData, expectedAction: string, ip: string): Promise<boolean> {
   const secret = serverEnv.TURNSTILE_SECRET_KEY;

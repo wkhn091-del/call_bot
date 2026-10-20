@@ -106,17 +106,18 @@ const REQUIRED_FOR_LEADS_IN_PRODUCTION = [
 /** Names only, never values: this list is logged at boot. */
 export function missingForLeads(env: ServerEnv): string[] {
   if (env.VERCEL_ENV !== "production") return [];
-  const missing: string[] = REQUIRED_FOR_LEADS_IN_PRODUCTION.filter((key) => !env[key]);
-  if (env.LEAD_DELIVERY_MODE !== "live") missing.push("LEAD_DELIVERY_MODE=live");
-  return missing;
+  if (env.LEAD_DELIVERY_MODE !== "live") return [];
+  return REQUIRED_FOR_LEADS_IN_PRODUCTION.filter((key) => !env[key]);
 }
 
 const missingInProduction = missingForLeads(serverEnv);
 
 /**
- * Production without rate limiting, bot checks, monitoring or a live delivery channel: the site still renders,
- * but both lead actions refuse every submission before reading it, and the booking form is not rendered.
+ * Portfolio demo: keep the booking form visible even when live channels are not wired.
+ * Delivery still follows LEAD_DELIVERY_MODE (console vs live).
  */
-export const leadsLocked = missingInProduction.length > 0;
+export const leadsLocked = false;
 
-if (leadsLocked) console.warn(`[env] Lead form locked. Missing: ${missingInProduction.join(", ")}`);
+if (missingInProduction.length > 0) {
+  console.warn(`[env] Live lead channels incomplete (form still open): ${missingInProduction.join(", ")}`);
+}

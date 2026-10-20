@@ -4,15 +4,15 @@ type Props = { items: readonly FaqItem[]; heading?: string };
 
 export function Faq({ items, heading = "שאלות שבעלי עסקים שואלים אותנו" }: Props) {
   return (
-    <section id="faq" className="border-t border-night-800 py-24 md:py-32" aria-labelledby="faq-title">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 md:px-8 lg:grid-cols-12">
-        <div className="lg:col-span-4" data-reveal>
+    <section id="faq" className="border-t border-night-800 py-16 md:py-24" aria-labelledby="faq-title">
+      <div className="mx-auto max-w-3xl px-5 md:px-8">
+        <div className="mb-8" data-reveal>
           <p className="text-small font-medium text-teal-300">שאלות נפוצות</p>
-          <h2 id="faq-title" className="mt-4 text-h2 font-bold text-balance">
+          <h2 id="faq-title" className="mt-3 text-h2 font-bold text-balance">
             {heading}
           </h2>
         </div>
-        <div className="lg:col-span-8" data-reveal>
+        <div data-reveal>
           {items.map((item) => (
             <details key={item.q} className="group border-b border-night-700 first:border-t">
               <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-5 text-lead font-semibold text-mist-100">
