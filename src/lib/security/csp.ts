@@ -41,14 +41,8 @@ export function buildSiteCsp(nonce: string, isDev: boolean): string {
   return serialize({
     "default-src": ["'self'"],
     // 'strict-dynamic' lets the nonced GTM loader pull GA4, Meta, LinkedIn and Clarity after consent.
-    "script-src": [
-      "'self'",
-      `'nonce-${nonce}'`,
-      "'strict-dynamic'",
-      "https:",
-      TURNSTILE,
-      ...(isDev ? ["'unsafe-eval'"] : []),
-    ],
+    // No bare `https:` — older CSP2 parsers must not allow every HTTPS script.
+    "script-src": ["'self'", `'nonce-${nonce}'`, "'strict-dynamic'", ...(isDev ? ["'unsafe-eval'"] : [])],
     "style-src": ["'self'", `'nonce-${nonce}'`],
     // React style props and Motion write inline style attributes, which a nonce cannot cover.
     "style-src-attr": ["'unsafe-inline'"],

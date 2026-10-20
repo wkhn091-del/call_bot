@@ -18,12 +18,14 @@ const verifySchema = z.object({
 });
 
 /**
- * Without a secret (local / portfolio demo) verification is skipped.
- * Fails closed when a secret is set: if Cloudflare is unreachable the submission is rejected and reported.
+ * Without a secret: skip only outside live production (local, preview, portfolio console).
+ * Live production fails closed. When a secret is set and Cloudflare is unreachable, reject.
  */
 export async function verifyTurnstile(formData: FormData, expectedAction: string, ip: string): Promise<boolean> {
   const secret = serverEnv.TURNSTILE_SECRET_KEY;
-  if (!secret) return true;
+  if (!secret) {
+    return !(serverEnv.VERCEL_ENV === "production" && serverEnv.LEAD_DELIVERY_MODE === "live");
+  }
 
   const token = tokenSchema.safeParse(formData.get(TURNSTILE_FIELD));
   if (!token.success) return false;

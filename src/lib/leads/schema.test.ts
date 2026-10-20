@@ -43,7 +43,7 @@ describe("lead schemas", () => {
   it("rejects a free email with an actionable message", () => {
     const result = stepOneSchema.safeParse({ ...stepOne, email: "dana@gmail.com" });
     expect(result.success).toBe(false);
-    expect(result.error?.issues[0]?.message).toContain("המייל של העסק");
+    expect(result.error?.issues[0]?.message).toContain("מייל עסקי");
   });
 
   it("rejects names containing markup", () => {
@@ -57,5 +57,16 @@ describe("lead schemas", () => {
     expect(
       leadSchema.safeParse({ ...stepOne, company: "מוסך א.ב.", companySize: "10-30", industry: "garage" }).success,
     ).toBe(true);
+  });
+
+  it("rejects company names with markup or control characters", () => {
+    expect(
+      leadSchema.safeParse({
+        ...stepOne,
+        company: "<script>alert(1)</script>",
+        companySize: "10-30",
+        industry: "garage",
+      }).success,
+    ).toBe(false);
   });
 });

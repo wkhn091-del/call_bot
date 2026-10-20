@@ -50,18 +50,30 @@ function sharedLimiter(limit: number, windowMs: number): Ratelimit | null {
   return limiter;
 }
 
+function liveProductionNeedsSharedLimit(): boolean {
+  return serverEnv.VERCEL_ENV === "production" && serverEnv.LEAD_DELIVERY_MODE === "live";
+}
+
 /**
  * Sliding window shared by every instance through Upstash. Keys must not contain raw PII:
  * pass a hash (see `hashKey`) when limiting by email or phone.
+ * Live production fails closed without Upstash (or when Upstash errors) — no per-instance bypass.
  */
 export async function rateLimit(key: string, limit: number, windowMs: number): Promise<boolean> {
   const limiter = sharedLimiter(limit, windowMs);
-  if (!limiter) return memoryLimit(key, limit, windowMs);
+  if (!limiter) {
+    if (liveProductionNeedsSharedLimit()) {
+      reportError("rate-limit", new Error("Upstash missing in live production"));
+      return false;
+    }
+    return memoryLimit(key, limit, windowMs);
+  }
   try {
     const { success } = await limiter.limit(key);
     return success;
   } catch (error) {
     reportError("rate-limit", error);
+    if (liveProductionNeedsSharedLimit()) return false;
     return memoryLimit(key, limit, windowMs);
   }
 }

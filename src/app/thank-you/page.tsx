@@ -14,7 +14,10 @@ export const metadata: Metadata = {
 };
 
 const demoCookieSchema = z.object({
-  firstName: z.string().max(60),
+  firstName: z
+    .string()
+    .max(60)
+    .regex(/^[\p{L}\p{M}' .\-״׳"]+$/u),
   email: z.email().max(120),
   industry: z
     .enum(INDUSTRIES.map((industry) => industry.id) as [IndustryId, ...IndustryId[]])

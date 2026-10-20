@@ -113,11 +113,11 @@ export function missingForLeads(env: ServerEnv): string[] {
 const missingInProduction = missingForLeads(serverEnv);
 
 /**
- * Portfolio demo: keep the booking form visible even when live channels are not wired.
- * Delivery still follows LEAD_DELIVERY_MODE (console vs live).
+ * Lock only when Production is on live delivery but required channels are missing.
+ * Console / portfolio keeps the form open; delivery still follows LEAD_DELIVERY_MODE.
  */
-export const leadsLocked = false;
+export const leadsLocked = missingInProduction.length > 0;
 
-if (missingInProduction.length > 0) {
-  console.warn(`[env] Live lead channels incomplete (form still open): ${missingInProduction.join(", ")}`);
+if (leadsLocked) {
+  console.warn(`[env] Lead form locked. Missing: ${missingInProduction.join(", ")}`);
 }

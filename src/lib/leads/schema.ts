@@ -78,7 +78,12 @@ export const stepOneSchema = z.object({
 });
 
 export const stepTwoSchema = z.object({
-  company: z.string().trim().min(2, "מה שם העסק?").max(80, "השם ארוך מדי. אפשר לקצר?"),
+  company: z
+    .string()
+    .trim()
+    .min(2, "מה שם העסק?")
+    .max(80, "השם ארוך מדי. אפשר לקצר?")
+    .regex(/^[\p{L}\p{M}\p{N} &'.,\-״׳"]+$/u, "שם העסק יכול לכלול אותיות ומספרים בלבד"),
   companySize: z.enum(COMPANY_SIZES, { error: "כמה עובדים יש בעסק?" }),
   industry: z.enum(INDUSTRY_IDS, { error: "באיזה תחום העסק?" }),
 });
