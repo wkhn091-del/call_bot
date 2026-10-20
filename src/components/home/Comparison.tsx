@@ -116,14 +116,14 @@ function DesktopTable() {
 
 export function Comparison() {
   return (
-    <section className="border-t border-night-800 py-24 md:py-32" aria-labelledby="compare-title">
+    <section className="border-t border-night-800 py-12 md:py-16" aria-labelledby="compare-title">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="max-w-3xl" data-reveal>
           <p className="text-small font-medium text-teal-300">לפני שמחליטים</p>
-          <h2 id="compare-title" className="mt-4 text-h2 font-bold text-balance">
+          <h2 id="compare-title" className="mt-3 text-h2 font-bold text-balance">
             {comparison.heading}
           </h2>
-          <p className="mt-5 text-lead text-mist-300">{comparison.intro}</p>
+          <p className="mt-3 text-lead text-mist-300">{comparison.intro}</p>
         </div>
 
         <StackedCards />

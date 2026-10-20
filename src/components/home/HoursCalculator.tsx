@@ -150,11 +150,11 @@ export function HoursCalculator() {
   };
 
   return (
-    <section id="hours" className="relative border-t border-night-800 py-24 md:py-32" aria-labelledby="hours-title">
+    <section id="hours" className="relative border-t border-night-800 py-12 md:py-16" aria-labelledby="hours-title">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="max-w-3xl" data-reveal>
           <p className="text-small font-medium text-missed-400">השעות שאף אחד לא עונה בהן</p>
-          <h2 id="hours-title" className="mt-4 text-h2 font-bold text-balance">
+          <h2 id="hours-title" className="mt-3 text-h2 font-bold text-balance">
             העסק פתוח <AnimatedNumber value={week.open} format={formatInt} className="font-latin tabular-nums" /> שעות
             בשבוע. בשאר{" "}
             <AnimatedNumber value={week.closed} format={formatInt} className="font-latin tabular-nums text-missed-400" />{" "}

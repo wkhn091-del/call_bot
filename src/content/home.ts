@@ -4,7 +4,7 @@ export const hero = {
   /** Ghost word behind the H1 — atmosphere only, aria-hidden in the component. */
   ghostWord: "21:40",
   title: "כל שיחה שלא נענית היא עסקה אבודה",
-  subtitle: "בערב ובסופ״ש עונה בעברית, קובע תור, ושולח את הליד ישר למערכת שלכם.",
+  subtitle: "CALLBOT עונה בערב ובסופ״ש בעברית, קובע תור, ומכניס ליד מלא ל-Monday או Powerlink.",
   cta: "לדמו של 15 דקות",
   secondary: "לראות שיחה לדוגמה",
   facts: [
@@ -36,10 +36,11 @@ export const nightVoices = {
 
 /** Commitments approved by the client on 12.10.2026. Never add terms here that the client did not approve. */
 export const commitments = {
-  /** Short form for the line under the hero CTA. The last item depends on whether Calendly is connected. */
+  /** Short form for the line under the hero CTA. */
   ctaNote: (hasCalendly: boolean) => [
     "7 ימי ניסיון",
-    hasCalendly ? "בוחרים מועד מיד" : "חוזרים עד יום עסקים",
+    "תמחור לפי שיחה",
+    hasCalendly ? "בוחרים מועד מיד" : "בלי מנוי חודשי",
   ],
   items: [
     {
@@ -179,5 +180,5 @@ export const faq: readonly FaqItem[] = [
 
 export const finalCta = {
   heading: "כל שיחה שלא נענית הערב יכולה להיות עסקה אבודה",
-  body: "15 דקות ושומעים איך הוא עונה בשם העסק שלכם. מחיר לפי שיחה, בלי מנוי.",
+  body: "הערב עוד לקוח יתקשר כשאתם סגורים. 15 דקות דמו ושומעים איך CALLBOT עונה בשם העסק. מחיר לפי שיחה, בלי מנוי.",
 };

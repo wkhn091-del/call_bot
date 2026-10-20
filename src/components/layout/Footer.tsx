@@ -107,8 +107,8 @@ export function Footer() {
           </p>
         </div>
         {!legal.companyId || !legal.address ? (
-          <p className="mx-auto max-w-7xl px-5 pb-5 text-center text-micro text-missed-400 md:px-8 md:text-start">
-            לפני עלייה חיה: יש למלא ח.פ, כתובת וטלפון ב־site.ts (פרטי עוסק חובה).
+          <p className="mx-auto max-w-7xl px-5 pb-5 text-center text-micro text-mist-500 md:px-8 md:text-start">
+            חסרים ח.פ וכתובת רשומה — להשלים ב־site.ts לפני השקה מסחרית.
           </p>
         ) : null}
       </div>

@@ -8,6 +8,7 @@ import { HoursCalculator } from "@/components/home/HoursCalculator";
 import { NightRoadmap } from "@/components/home/NightRoadmap";
 import { NightVoices } from "@/components/home/NightVoices";
 import { StickyCta } from "@/components/home/StickyCta";
+import { TrustBand } from "@/components/home/TrustBand";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faq } from "@/content/home";
 import { site } from "@/content/site";
@@ -17,6 +18,7 @@ import { leadsLocked } from "@/lib/env/server";
 export default function HomePage() {
   const url = publicEnv.NEXT_PUBLIC_SITE_URL;
   const hasCalendly = Boolean(publicEnv.NEXT_PUBLIC_CALENDLY_URL);
+  const orgEmail = site.contact.privacyEmail ?? site.contact.salesEmail;
 
   return (
     <>
@@ -27,9 +29,18 @@ export default function HomePage() {
             {
               "@type": "Organization",
               "@id": `${url}/#org`,
-              name: site.company,
+              name: site.legal.legalName ?? site.company,
               url,
+              email: orgEmail ?? undefined,
               brand: { "@type": "Brand", name: site.brand },
+              contactPoint: orgEmail
+                ? {
+                    "@type": "ContactPoint",
+                    contactType: "sales",
+                    email: orgEmail,
+                    availableLanguage: ["Hebrew", "he"],
+                  }
+                : undefined,
             },
             {
               "@type": "SoftwareApplication",
@@ -39,6 +50,12 @@ export default function HomePage() {
               inLanguage: "he",
               description: site.description,
               publisher: { "@id": `${url}/#org` },
+              offers: {
+                "@type": "Offer",
+                priceCurrency: "ILS",
+                description: "תמחור לפי שיחה, בלי מנוי חודשי קבוע. הצעה מדויקת בדמו.",
+                url: `${url}/pricing`,
+              },
             },
             {
               "@type": "FAQPage",
@@ -52,6 +69,7 @@ export default function HomePage() {
         }}
       />
       <Hero hasCalendly={hasCalendly} />
+      <TrustBand />
       <NightVoices />
       <HoursCalculator />
       <CallDemo />
