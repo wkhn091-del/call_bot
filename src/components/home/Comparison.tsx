@@ -25,7 +25,7 @@ function KeepPrefixed({ text }: { text: string }) {
 /** Mobile: one card per question, CALLBOT's answer first. Cards stick and pile up while scrolling (motion-kit A30). */
 function StackedCards() {
   return (
-    <ol className="mt-10 flex flex-col gap-4 md:hidden">
+    <ol className="mt-6 flex flex-col gap-3 md:hidden">
       {comparison.rows.map((row, index) => (
         <li
           key={row.label}
@@ -69,7 +69,7 @@ function StackedCards() {
 
 function DesktopTable() {
   return (
-    <div className="mt-12 hidden overflow-hidden rounded-panel border border-night-700 md:block" data-reveal>
+    <div className="mt-6 hidden overflow-hidden rounded-panel border border-night-700 md:block" data-reveal>
       <table className="w-full border-collapse text-start">
         <caption className="sr-only">השוואה בין משיבון, מוקד מענה אנושי ו-CALLBOT</caption>
         <thead>

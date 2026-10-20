@@ -165,7 +165,7 @@ export function HoursCalculator() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
+        <div className="mt-6 grid gap-5 lg:grid-cols-12 lg:items-start">
           <div className="rounded-panel border border-night-700 bg-night-900 p-5 md:p-7 lg:col-span-7" data-reveal>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               <Select

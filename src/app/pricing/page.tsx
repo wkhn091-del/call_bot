@@ -14,23 +14,23 @@ const shekel = new Intl.NumberFormat("he-IL", { minimumFractionDigits: 0, maximu
 export default function PricingPage() {
   return (
     <>
-      <section className="relative overflow-hidden py-20 md:py-28" aria-labelledby="pricing-title">
+      <section className="relative overflow-hidden py-12 md:py-16" aria-labelledby="pricing-title">
         <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-full bg-linear-to-b from-night-800/60 to-night-950" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-12">
+        <div className="relative mx-auto grid max-w-7xl gap-8 px-5 md:px-8 lg:grid-cols-12">
           <div className="lg:col-span-6">
             <p className="text-small font-medium text-teal-300">תמחור</p>
-            <h1 id="pricing-title" className="mt-4 text-display font-extrabold text-balance">
+            <h1 id="pricing-title" className="mt-3 text-display font-extrabold text-balance">
               משלמים על שיחות, לא על חודשים.
             </h1>
-            <p className="mt-6 max-w-xl text-lead text-mist-300">
+            <p className="mt-4 max-w-xl text-lead text-mist-300">
               אין מנוי חודשי קבוע. משלמים לפי שיחה שהבוט ענה עליה, כך שבחודש שקט החשבון קטן יותר.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
               <CtaLink href="/#book" className="min-h-14 px-7 text-lead">
                 להצעת מחיר בדמו של 15 דקות
               </CtaLink>
             </div>
-            <p className="mt-4 text-small text-mist-400">דמו אונליין עם נציג · בלי התחייבות</p>
+            <p className="mt-3 text-small text-mist-400">7 ימי ניסיון · התקנה עד 7 ימים · בלי מנוי חודשי</p>
           </div>
 
           <div className="lg:col-span-6">

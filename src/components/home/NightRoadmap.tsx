@@ -291,13 +291,13 @@ export function NightRoadmap() {
 
   if (reduce) {
     return (
-      <section id="how" className="border-t border-night-800 py-24 md:py-32" aria-labelledby="how-title">
+      <section id="how" className="border-t border-night-800 py-12 md:py-16" aria-labelledby="how-title">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <p className="text-small font-medium text-teal-300">איך זה עובד</p>
-          <h2 id="how-title" className="mt-4 max-w-3xl text-h2 font-bold text-balance">
+          <h2 id="how-title" className="mt-3 max-w-3xl text-h2 font-bold text-balance">
             {roadmap.heading}
           </h2>
-          <p className="mt-5 max-w-2xl text-lead text-mist-300">{roadmap.intro}</p>
+          <p className="mt-3 max-w-2xl text-lead text-mist-300">{roadmap.intro}</p>
           <StaticRoadmap />
         </div>
       </section>

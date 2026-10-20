@@ -13,7 +13,7 @@ import { publicEnv } from "@/lib/env/public";
 import "./globals.css";
 
 const heebo = Heebo({
-  weight: ["300", "400", "500", "700", "800"],
+  weight: ["400", "500", "700", "800"],
   subsets: ["hebrew", "latin"],
   display: "swap",
   variable: "--font-heebo",
@@ -37,7 +37,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "he_IL",
     siteName: site.brand,
+    url: publicEnv.NEXT_PUBLIC_SITE_URL,
+    title: "CALLBOT | כל שיחה שלא נענית היא עסקה אבודה",
+    description: site.description,
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "CALLBOT | כל שיחה שלא נענית היא עסקה אבודה",
+    description: site.description,
+  },
+  robots: { index: true, follow: true },
   formatDetection: { telephone: false },
 };
 

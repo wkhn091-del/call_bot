@@ -3,7 +3,9 @@
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { CtaLink } from "@/components/ui/CtaLink";
 import { demoCalls, type DemoCall } from "@/content/calls";
+import { hero } from "@/content/home";
 import { track } from "@/lib/analytics/track";
 import { duration, ease, spring } from "@/lib/motion/tokens";
 
@@ -136,17 +138,17 @@ export function CallDemo() {
     <section
       ref={sectionRef}
       id="demo"
-      className="relative border-t border-night-800 bg-night-900/40 py-24 md:py-32"
+      className="relative border-t border-night-800 bg-night-900/40 py-12 md:py-16"
       aria-labelledby="demo-title"
     >
       <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl" data-reveal>
             <p className="text-small font-medium text-teal-300">שיחה לדוגמה</p>
-            <h2 id="demo-title" className="mt-4 text-h2 font-bold text-balance">
+            <h2 id="demo-title" className="mt-3 text-h2 font-bold text-balance">
               ככה נראית שיחה כשלקוח מתקשר אחרי שסגרתם
             </h2>
-            <p className="mt-5 text-lead text-mist-300">
+            <p className="mt-3 text-lead text-mist-300">
               בחרו תחום. מימין השיחה, ומשמאל מה שנכנס למערכת שלכם תוך כדי.
             </p>
           </div>
@@ -184,7 +186,7 @@ export function CallDemo() {
           </div>
         </div>
 
-        <div ref={panelRef} id="demo-panel" role="tabpanel" className="mt-12 grid gap-6 lg:grid-cols-12">
+        <div ref={panelRef} id="demo-panel" role="tabpanel" className="mt-6 grid gap-5 lg:grid-cols-12">
           <div className="overflow-hidden rounded-panel border border-night-700 bg-night-950 shadow-panel lg:col-span-7">
             <div className="relative h-32 overflow-hidden md:h-40" aria-hidden="true">
               <AnimatePresence initial={false}>
@@ -368,8 +370,14 @@ export function CallDemo() {
                 )}
               </p>
             </div>
-            <p className="text-micro text-mist-500">תסריט הדגמה. שמות העסקים והלקוחות בדויים. בדמו תשמעו את הבוט עצמו.</p>
+            <p className="text-micro text-mist-400">תסריט הדגמה. שמות העסקים והלקוחות בדויים. בדמו תשמעו את הבוט עצמו.</p>
           </div>
+        </div>
+        <div className="mt-6 flex flex-col items-start gap-3 border-t border-night-800 pt-5 sm:flex-row sm:items-center sm:justify-between" data-reveal>
+          <p className="text-small text-mist-300">רוצים לשמוע אותו עונה בשם העסק שלכם?</p>
+          <CtaLink href="#book" className="min-h-11 shrink-0 px-5 text-small">
+            {hero.cta}
+          </CtaLink>
         </div>
       </div>
     </section>
