@@ -127,9 +127,15 @@ export async function submitLead(_previous: FormState, formData: FormData): Prom
     return { status: "step-two", errors: {}, message: RATE_ERROR };
   }
 
+  const marketingOptIn = formData.get("marketingOptIn") === "1";
+
   let delivered = false;
   try {
-    delivered = await deliverLead(parsed.data, { source: meta.data.source ?? null, page: meta.data.page ?? null });
+    delivered = await deliverLead(parsed.data, {
+      source: meta.data.source ?? null,
+      page: meta.data.page ?? null,
+      marketingOptIn,
+    });
   } catch (error) {
     reportError("lead", error);
   }

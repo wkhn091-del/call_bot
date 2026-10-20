@@ -35,9 +35,24 @@ export default function PrivacyPage() {
 
       <h2>הזכויות שלכם</h2>
       <p>
-        לפי חוק הגנת הפרטיות אפשר לבקש לעיין במידע שנשמר עליכם, לתקן אותו או למחוק אותו. אפשר לפנות אלינו בנושא דרך טופס
-        תיאום הדמו ולציין שמדובר בבקשת פרטיות.
+        לפי חוק הגנת הפרטיות אפשר לבקש לעיין במידע שנשמר עליכם, לתקן אותו או למחוק אותו.
+        {site.contact.privacyEmail || site.contact.salesEmail ? (
+          <>
+            {" "}
+            פניות פרטיות:{" "}
+            <a
+              href={`mailto:${site.contact.privacyEmail ?? site.contact.salesEmail}`}
+              className="text-teal-300 underline underline-offset-4"
+            >
+              <bdi dir="ltr">{site.contact.privacyEmail ?? site.contact.salesEmail}</bdi>
+            </a>
+            .
+          </>
+        ) : (
+          <> אפשר לפנות דרך טופס תיאום הדמו ולציין שמדובר בבקשת פרטיות.</>
+        )}
       </p>
+      <p>דיוור שיווקי נשלח רק אם סימנתם הסכמה מפורשת בטופס. אפשר לבטל בכל עת.</p>
     </LegalPage>
   );
 }

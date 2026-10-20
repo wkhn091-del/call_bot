@@ -5,7 +5,7 @@ import { INDUSTRIES, type Lead, type StepOne } from "./schema";
 
 const TIMEOUT_MS = 6000;
 
-type Context = { source: string | null; page: string | null };
+type Context = { source: string | null; page: string | null; marketingOptIn: boolean };
 
 function industryLabel(id: Lead["industry"]): string {
   return INDUSTRIES.find((industry) => industry.id === id)?.label ?? id;
@@ -42,6 +42,7 @@ async function notifySlack(lead: Lead, context: Context): Promise<void> {
     `*בקשת דמו חדשה* · ${slackEscape(lead.company)}`,
     `${slackEscape(`${lead.firstName} ${lead.lastName}`)} · ${slackEscape(lead.phone)} · ${slackEscape(lead.email)}`,
     `גודל: ${slackEscape(lead.companySize)} עובדים · תחום: ${slackEscape(industryLabel(lead.industry))}`,
+    context.marketingOptIn ? "דיוור שיווקי: כן (הסכמה מפורשת)" : "דיוור שיווקי: לא",
     context.source ? `מקור: ${slackEscape(context.source)}` : null,
   ].filter(Boolean);
   await post(
@@ -67,6 +68,7 @@ async function trackSegment(lead: Lead, context: Context): Promise<void> {
           industry: lead.industry,
           source: context.source,
           page: context.page,
+          marketingOptIn: context.marketingOptIn,
         },
         context: { traits: { email: lead.email, firstName: lead.firstName, lastName: lead.lastName, company: lead.company } },
       }),
@@ -113,7 +115,13 @@ export async function deliverPartialLead(lead: StepOne): Promise<void> {
 /** Returns false only when no channel that a salesperson watches received the lead. */
 export async function deliverLead(lead: Lead, context: Context): Promise<boolean> {
   if (serverEnv.LEAD_DELIVERY_MODE === "console") {
-    console.info("[lead:complete]", { email: lead.email, company: lead.company, ...context });
+    console.info("[lead:complete]", {
+      email: lead.email,
+      company: lead.company,
+      marketingOptIn: context.marketingOptIn,
+      source: context.source,
+      page: context.page,
+    });
     return true;
   }
 

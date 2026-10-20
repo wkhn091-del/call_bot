@@ -16,7 +16,7 @@ export function Faq({ items, heading = "מה שואלים לפני שסוגרי�
           {items.map((item) => (
             <details key={item.q} className="group border-b border-night-700 first:border-t">
               <summary className="flex cursor-pointer list-none items-start gap-3 py-3.5 text-body font-semibold text-mist-100">
-                <span className="min-w-0 flex-1 text-pretty">{item.q}</span>
+                <h3 className="min-w-0 flex-1 text-pretty text-body font-semibold">{item.q}</h3>
                 <span
                   aria-hidden="true"
                   className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full border border-night-600 text-mist-300 transition-transform duration-300 ease-[var(--ease-spring)] group-open:rotate-45"

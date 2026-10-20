@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useActionState, useEffect, useId, useRef, useState, type ReactNode, type RefObject } from "react";
+import { LeadPrivacyNotice, MarketingOptIn } from "@/components/contact/LeadPrivacyNotice";
 import { track } from "@/lib/analytics/track";
 import { submitLead, submitStepOne, type FormState } from "@/lib/leads/actions";
 import { COMPANY_SIZES, INDUSTRIES, type IndustryId } from "@/lib/leads/options";
@@ -16,7 +16,7 @@ type StepOneValues = Record<(typeof STEP_ONE_FIELDS)[number], string>;
 type Meta = { startedAt: string; source: string; page: string };
 
 const inputClass =
-  "min-h-12 w-full rounded-control border border-night-600 bg-night-950 px-4 text-body text-mist-100 placeholder:text-mist-500 transition-colors duration-100 focus:border-teal-400 focus:outline-none aria-invalid:border-missed-400";
+  "min-h-12 w-full rounded-control border border-night-600 bg-night-950 px-4 text-body text-mist-100 placeholder:text-mist-500 transition-colors duration-100 focus:border-teal-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400 aria-invalid:border-missed-400";
 
 const chipClass =
   "inline-flex min-h-11 cursor-pointer items-center rounded-control border border-night-600 px-4 text-small text-mist-300 transition-colors duration-100 peer-checked:border-teal-400 peer-checked:bg-teal-400/10 peer-checked:text-mist-100 peer-focus-visible:outline-2 peer-focus-visible:outline-teal-400";
@@ -65,7 +65,7 @@ function Field({ name, label, error, hint, children }: FieldProps) {
           {error}
         </p>
       ) : hint ? (
-        <p id={messageId} className="text-micro text-mist-500">
+        <p id={messageId} className="text-micro text-mist-400">
           {hint}
         </p>
       ) : null}
@@ -214,6 +214,8 @@ function StepTwoForm({ values, meta, hasCalendly, turnstileSiteKey, onEdit }: St
       {state.message ? <ErrorBox>{state.message}</ErrorBox> : null}
       <TurnstileField siteKey={turnstileSiteKey} action="demo_step2" resetSignal={state} />
 
+      <MarketingOptIn />
+
       <button type="submit" disabled={pending} className={submitClass}>
         {pending ? (
           <>
@@ -225,6 +227,7 @@ function StepTwoForm({ values, meta, hasCalendly, turnstileSiteKey, onEdit }: St
           "לתיאום הדמו"
         )}
       </button>
+      <LeadPrivacyNotice />
     </form>
   );
 }
@@ -347,12 +350,7 @@ export function DemoForm({ hasCalendly, turnstileSiteKey }: { hasCalendly: boole
         </form>
       )}
 
-      <p className="mt-5 text-micro text-mist-500">
-        הפרטים משמשים רק לתיאום הדמו ולחזרה אליכם.{" "}
-        <Link href="/privacy" className="underline underline-offset-4 hover:text-mist-300">
-          מדיניות פרטיות
-        </Link>
-      </p>
+      <LeadPrivacyNotice />
     </div>
   );
 }

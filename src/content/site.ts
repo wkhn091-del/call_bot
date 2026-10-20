@@ -14,6 +14,7 @@ export const site = {
   /**
    * Values the client still has to supply (PROJECT_BRIEF.md, "סתירות פתוחות").
    * Each block renders only when its fields are filled, so nothing invented reaches the page.
+   * Before a live commercial launch: fill legal + contact + accessibility coordinator.
    */
   legal: {
     legalName: null as string | null,
@@ -23,12 +24,14 @@ export const site = {
   contact: {
     salesPhone: null as string | null,
     salesEmail: null as string | null,
+    /** Prefer a monitored inbox used also for privacy / deletion requests. */
+    privacyEmail: null as string | null,
     hours: null as string | null,
   },
   accessibility: {
     coordinatorName: null as string | null,
     coordinatorEmail: null as string | null,
     coordinatorPhone: null as string | null,
-    lastReviewed: "11.10.2026",
+    lastReviewed: "20.10.2026",
   },
 } as const;

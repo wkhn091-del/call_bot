@@ -86,7 +86,7 @@ export function Footer() {
 
       {/* Copyright bar */}
       <div className="border-t border-night-800">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 py-5 text-micro text-mist-500 md:flex-row md:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 py-5 text-micro text-mist-400 md:flex-row md:px-8">
           <p>
             <bdi dir="ltr">
               © {new Date().getFullYear()} {legal.legalName ?? site.company}
@@ -99,8 +99,18 @@ export function Footer() {
               </span>
             ) : null}
             {legal.address ? <span>{legal.address}</span> : null}
+            {contact.salesPhone ? (
+              <a href={`tel:${contact.salesPhone.replace(/\D/g, "")}`} className="hover:text-mist-100">
+                <bdi dir="ltr">{contact.salesPhone}</bdi>
+              </a>
+            ) : null}
           </p>
         </div>
+        {!legal.companyId || !legal.address ? (
+          <p className="mx-auto max-w-7xl px-5 pb-5 text-center text-micro text-missed-400 md:px-8 md:text-start">
+            לפני עלייה חיה: יש למלא ח.פ, כתובת וטלפון ב־site.ts (פרטי עוסק חובה).
+          </p>
+        ) : null}
       </div>
     </footer>
   );
