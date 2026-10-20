@@ -222,7 +222,7 @@ export function HoursCalculator() {
                                 )}
                                 <span
                                   className={`relative size-1.5 rounded-full transition-colors duration-500 md:size-2 ${
-                                    covered ? "bg-teal-300 shadow-[0_0_8px] shadow-teal-300/80" : "bg-missed-400 shadow-[0_0_8px] shadow-missed-400/80"
+                                    covered ? "bg-teal-300" : "bg-missed-400"
                                   }`}
                                 />
                               </>
@@ -272,7 +272,7 @@ export function HoursCalculator() {
               {!touchedSwitch && (
                 <span
                   aria-hidden="true"
-                  className="switch-invite pointer-events-none absolute -inset-px rounded-card border border-teal-400/50 shadow-[0_0_24px] shadow-teal-400/25"
+                  className="switch-invite pointer-events-none absolute -inset-px rounded-card border border-teal-400/50"
                 />
               )}
               <span className="flex flex-col">
@@ -288,7 +288,7 @@ export function HoursCalculator() {
                 aria-hidden="true"
               >
                 <span
-                  className={`absolute start-1 top-1 size-5 rounded-full bg-mist-100 shadow-md transition-transform duration-300 ease-out ${
+                  className={`absolute start-1 top-1 size-5 rounded-full bg-mist-100 shadow-[var(--shadow-contact)] transition-transform duration-300 ease-[var(--ease-spring)] ${
                     covered ? "-translate-x-6" : "translate-x-0"
                   }`}
                 />

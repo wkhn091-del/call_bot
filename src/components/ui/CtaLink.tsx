@@ -4,7 +4,7 @@ import type { ComponentProps } from "react";
 type Variant = "primary" | "ghost";
 
 const base =
-  "group inline-flex min-h-12 items-center justify-center gap-2 rounded-control px-6 text-body font-semibold transition duration-100 ease-out active:scale-97 motion-reduce:active:scale-100";
+  "group inline-flex min-h-12 items-center justify-center gap-2 rounded-control px-6 text-body font-semibold transition duration-150 ease-[var(--ease-spring)] active:scale-97 motion-reduce:active:scale-100";
 
 const variants: Record<Variant, string> = {
   primary: "bg-teal-400 text-night-950 shadow-cta hover:bg-teal-300",

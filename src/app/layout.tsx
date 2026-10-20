@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Heebo, Inter } from "next/font/google";
+import { Heebo, IBM_Plex_Sans } from "next/font/google";
 import { headers } from "next/headers";
 import { AnalyticsEvents } from "@/components/layout/AnalyticsEvents";
 import { ConsentAndAnalytics } from "@/components/layout/ConsentAndAnalytics";
@@ -19,11 +19,11 @@ const heebo = Heebo({
   variable: "--font-heebo",
 });
 
-const inter = Inter({
-  weight: ["400", "500", "600", "800"],
+const plex = IBM_Plex_Sans({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-latin-face",
 });
 
 export const metadata: Metadata = {
@@ -52,7 +52,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const nonce = (await headers()).get("x-nonce") ?? "";
 
   return (
-    <html lang="he" dir="rtl" className={`${heebo.variable} ${inter.variable}`}>
+    <html lang="he" dir="rtl" className={`${heebo.variable} ${plex.variable}`}>
       <body className="grain bg-night-950 font-sans text-body text-mist-100">
         <MotionProvider nonce={nonce}>
           <Header />

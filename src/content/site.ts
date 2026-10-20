@@ -3,7 +3,7 @@ export const site = {
   company: "AfterHours AI",
   domain: "afterhours.ai",
   description:
-    "CALLBOT עונה לשיחות של העסק כשאתם לא זמינים, מנהל שיחה בעברית מדוברת, קובע פגישות ושולח את הליד ל-Monday או ל-Powerlink. תמחור לפי שיחה, בלי מנוי חודשי קבוע.",
+    "CALLBOT עונה כשאתם לא. עברית מדוברת, תור בשיחה, ליד ל-CRM. משלמים לפי שיחה.",
   demoMinutes: 15,
   nav: [
     { href: "/#how", label: "איך זה עובד" },

@@ -30,7 +30,9 @@ export function StickyCta() {
   return (
     <div
       className={`fixed inset-x-0 bottom-0 z-30 border-t border-night-700 bg-night-950/90 pb-safe px-4 pt-3 backdrop-blur-md transition duration-300 md:hidden ${
-        show ? "translate-y-0 opacity-100 ease-out" : "pointer-events-none translate-y-full opacity-0 ease-in"
+        show
+          ? "translate-y-0 opacity-100 ease-[var(--ease-out)]"
+          : "pointer-events-none translate-y-full opacity-0 ease-[var(--ease-in)]"
       }`}
       aria-hidden={!show}
     >

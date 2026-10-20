@@ -48,29 +48,29 @@ export function normalizeIsraeliPhone(raw: string): string | null {
 
 const name = (label: string) =>
   z
-    .string({ error: `נשמח לדעת ${label}` })
+    .string({ error: label })
     .trim()
-    .min(2, `נשמח לדעת ${label}`)
+    .min(2, label)
     .max(60, "השם ארוך מדי. אפשר לקצר?")
     .regex(/^[\p{L}\p{M}' .\-״׳"]+$/u, "השם יכול לכלול רק אותיות");
 
 export const stepOneSchema = z.object({
-  firstName: name("איך קוראים לך"),
-  lastName: name("מה שם המשפחה"),
+  firstName: name("איך קוראים לך?"),
+  lastName: name("מה שם המשפחה?"),
   email: z
     .string()
     .trim()
     .toLowerCase()
     .max(120, "כתובת המייל ארוכה מדי")
-    .pipe(z.email("כתובת המייל לא שלמה. כדאי לבדוק את מה שאחרי ה-@"))
-    .refine((email) => !isFreeEmail(email), "נשמח לכתובת המייל של העסק, למשל name@yourcompany.co.il"),
+    .pipe(z.email("כתובת המייל לא שלמה. בדקו את מה שאחרי ה-@"))
+    .refine((email) => !isFreeEmail(email), "מייל עסקי בלבד, למשל name@company.co.il"),
   phone: z
     .string()
     .max(20, "המספר ארוך מדי")
     .transform((value, ctx) => {
       const normalized = normalizeIsraeliPhone(value);
       if (!normalized) {
-        ctx.addIssue({ code: "custom", message: "נשמח למספר ישראלי מלא, למשל 050-1234567" });
+        ctx.addIssue({ code: "custom", message: "מספר ישראלי מלא, למשל 050-1234567" });
         return z.NEVER;
       }
       return normalized;

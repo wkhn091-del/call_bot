@@ -39,14 +39,8 @@ export function Hero({ hasCalendly }: { hasCalendly: boolean }) {
             {hero.ghostWord}
           </span>
 
-          <HeroEntrance delay={0.12} y={6}>
-            <p className="font-latin text-[0.8125rem] font-bold tracking-[0.14em] text-mist-100 md:text-small">
-              {hero.brand}
-            </p>
-          </HeroEntrance>
-
           <HeroEntrance delay={0.2} y={8}>
-            <p className="mt-2.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-micro font-medium tracking-[0.02em] text-mist-400 md:mt-3">
+            <p className="flex items-center gap-2.5 text-micro font-medium tracking-[0.02em] text-mist-400">
               <bdi dir="ltr" className="font-latin font-semibold tabular-nums text-teal-300">
                 {hero.eyebrowTime}
               </bdi>
@@ -66,40 +60,16 @@ export function Hero({ hasCalendly }: { hasCalendly: boolean }) {
             </p>
           </HeroEntrance>
 
-          <HeroEntrance delay={0.32} y={6}>
-            <ul className="hero-facts mt-3.5 grid gap-2 md:mt-5">
-              {hero.facts.map((fact) => (
-                <li key={fact.title} className="flex items-baseline gap-2 text-micro text-mist-300 md:text-small">
-                  <span className="mt-[0.35em] size-1 shrink-0 rounded-full bg-teal-400" aria-hidden="true" />
-                  <span>
-                    <span className="font-semibold text-mist-100">{fact.title}</span>
-                    <span className="text-mist-100/30"> · </span>
-                    <span>{fact.body}</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </HeroEntrance>
-
           <HeroEntrance delay={0.36} y={8} className="mt-5 md:mt-7">
-            <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:items-center md:gap-3">
-              <Magnetic className="flex w-full sm:w-auto" strength={0.18}>
-                <CtaLink
-                  id="hero-cta"
-                  href="#book"
-                  className="hero-cta min-h-12 w-full px-7 text-small md:min-h-14 md:px-8 md:text-body"
-                >
-                  {hero.cta}
-                </CtaLink>
-              </Magnetic>
+            <Magnetic className="flex w-full md:inline-flex md:w-auto" strength={0.18}>
               <CtaLink
-                href="#demo"
-                variant="ghost"
-                className="min-h-12 w-full px-6 text-small sm:w-auto md:min-h-14 md:text-body"
+                id="hero-cta"
+                href="#book"
+                className="hero-cta min-h-12 w-full px-7 text-small md:min-h-14 md:w-auto md:px-8 md:text-body"
               >
-                {hero.secondary}
+                {hero.cta}
               </CtaLink>
-            </div>
+            </Magnetic>
 
             <p className="mt-2.5 text-micro text-mist-400 md:mt-3">
               {notes.map((item, i) => (
@@ -116,7 +86,7 @@ export function Hero({ hasCalendly }: { hasCalendly: boolean }) {
           </HeroEntrance>
         </div>
 
-        <div className="hero-character relative z-0 h-[38svh] w-full shrink-0 md:col-span-7 md:col-start-6 md:row-start-1 md:h-[min(78svh,40rem)] md:self-end md:-ms-4 lg:-ms-6">
+        <div className="hero-character relative z-0 h-[42svh] w-full shrink-0 md:col-span-7 md:col-start-6 md:row-start-1 md:h-[min(78svh,40rem)] md:self-end md:-ms-4 lg:-ms-6">
           <div className="hero-character__glow" aria-hidden="true" />
           <div className="hero-character__stage relative mx-auto h-full w-full max-w-[17rem] md:max-w-none">
             <Image

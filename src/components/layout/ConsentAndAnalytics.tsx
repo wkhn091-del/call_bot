@@ -67,8 +67,7 @@ export function ConsentAndAnalytics({ gtmId, nonce }: Props) {
       className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-xl rounded-card border border-night-600 bg-night-900/95 p-4 shadow-panel backdrop-blur-md md:inset-x-auto md:start-6"
     >
       <p className="text-small text-mist-300">
-        נשמח להשתמש בעוגיות למדידה ולשיפור האתר, וכדי להבין מאילו קמפיינים הגעתם. אפשר לסרב, והאתר יעבוד בדיוק אותו
-        דבר.{" "}
+        משתמשים בעוגיות למדידה ולשיפור האתר, וכדי להבין מאילו קמפיינים הגעתם. אפשר לסרב — האתר יעבוד אותו דבר.{" "}
         <Link href="/privacy" className="text-teal-300 underline underline-offset-4">
           מדיניות פרטיות
         </Link>
