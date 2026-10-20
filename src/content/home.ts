@@ -3,7 +3,7 @@ export const hero = {
   eyebrow: "העסק סגור",
   /** Ghost word behind the H1 — atmosphere only, aria-hidden in the component. */
   ghostWord: "21:40",
-  title: "כל שיחה שלא נענית — עסקה אבודה",
+  title: "כל שיחה שלא נענית היא עסקה אבודה",
   subtitle: "בערב ובסופ״ש עונה בעברית, קובע תור, ושולח את הליד ישר למערכת שלכם.",
   cta: "לדמו של 15 דקות",
   secondary: "לראות שיחה לדוגמה",
