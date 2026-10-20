@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import Link from "next/link";
 import { nightVoices } from "@/content/home";
 
 function Phrases() {
@@ -24,7 +25,15 @@ function Phrases() {
 export function NightVoices() {
   return (
     <section className="border-t border-night-800 py-10 md:py-14" aria-label={nightVoices.label}>
-      <p className="mx-auto max-w-7xl px-5 text-small font-medium text-mist-500 md:px-8">{nightVoices.label}</p>
+      <div className="mx-auto flex max-w-7xl flex-wrap items-baseline justify-between gap-3 px-5 md:px-8">
+        <p className="text-small font-medium text-mist-500">{nightVoices.label}</p>
+        <Link
+          href="#demo"
+          className="text-small font-semibold text-teal-300 underline-offset-4 transition hover:text-teal-200 hover:underline"
+        >
+          {nightVoices.cta}
+        </Link>
+      </div>
       <div className="marquee mt-5" style={{ "--marquee-duration": "70s" } as CSSProperties}>
         <div className="marquee__track">
           <ul className="marquee__group">

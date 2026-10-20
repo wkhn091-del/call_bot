@@ -1,12 +1,14 @@
 export const hero = {
+  brand: "CALLBOT",
   eyebrowTime: "21:40",
-  eyebrow: "העסק סגור",
+  eyebrow: "העסק סגור · עוד שיחה תלך למתחרה",
   /** Ghost word behind the H1 — atmosphere only, aria-hidden in the component. */
   ghostWord: "21:40",
-  title: "השיחה שלא עניתם עליה כבר הלכה",
-  subtitle: "בערב ובסופי שבוע עונה בעברית, קובע תור, ושולח את הליד ישר למערכת שלכם.",
+  title: "כל שיחה שלא נענית — עסקה אבודה",
+  subtitle:
+    "CALLBOT עונה בערב ובסופ״ש בעברית, קובע תור, ומכניס את הליד ל-Monday או Powerlink.",
   cta: "לדמו של 15 דקות",
-  secondary: "לראות שיחה לדוגמה",
+  secondary: "לשמוע שיחה לדוגמה",
   facts: [
     { icon: "voice", title: "עברית מדוברת", body: "כולל סלנג, מבטאים וקיצורים" },
     { icon: "crm", title: "הליד נכנס ל-CRM", body: "Monday או Powerlink, בלי העתקות" },
@@ -19,6 +21,7 @@ export const hero = {
 /** Illustrative caller lines, not quotes from real customers. The label on screen says so. */
 export const nightVoices = {
   label: "ככה נשמעות שיחות שמגיעות אחרי שסגרתם",
+  cta: "לשמוע שיחה לדוגמה",
   phrases: [
     "אחי, יש מצב לתור מחר בבוקר?",
     "הרכב עושה רעש מוזר כשאני בולם",
@@ -35,10 +38,11 @@ export const nightVoices = {
 
 /** Commitments approved by the client on 12.10.2026. Never add terms here that the client did not approve. */
 export const commitments = {
-  /** Short form for the line under the hero CTA. The last item depends on whether Calendly is connected. */
-  ctaNote: (hasCalendly: boolean) => [
+  /** Short form for the line under the hero CTA. */
+  ctaNote: (_hasCalendly: boolean) => [
     "7 ימי ניסיון",
-    hasCalendly ? "בוחרים מועד מיד" : "חוזרים עד יום עסקים",
+    "בלי מנוי חודשי",
+    "מחיר לפי שיחה",
   ],
   items: [
     {
@@ -177,6 +181,6 @@ export const faq: readonly FaqItem[] = [
 ];
 
 export const finalCta = {
-  heading: "השיחה הבאה שלא תענו עליה כבר בדרך",
-  body: "15 דקות של דמו, ותדעו בדיוק איך CALLBOT יענה ללקוחות שלכם הערב.",
+  heading: "כל שיחה שלא נענית הערב — יכולה להיות עסקה אבודה",
+  body: "15 דקות של דמו, ואתם יודעים בדיוק איך CALLBOT עונה בשם העסק שלכם — בלי מנוי חודשי, מחיר לפי שיחה.",
 };

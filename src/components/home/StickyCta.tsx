@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { hero } from "@/content/home";
 
 /** Mobile bar that appears once the hero CTA scrolls away and hides again while the form is on screen. */
 export function StickyCta() {
@@ -38,7 +39,7 @@ export function StickyCta() {
         tabIndex={show ? 0 : -1}
         className="flex min-h-12 items-center justify-center rounded-control bg-teal-400 text-body font-semibold text-night-950 active:scale-97"
       >
-        לתיאום דמו של 15 דקות
+        {hero.cta}
       </Link>
     </div>
   );
