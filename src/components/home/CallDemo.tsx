@@ -94,7 +94,10 @@ export function CallDemo() {
 
   useEffect(() => {
     const container = scrollRef.current;
-    if (container) container.scrollTo({ top: container.scrollHeight, behavior: reduce ? "auto" : "smooth" });
+    if (!container) return;
+    // Mobile: chat grows with the page — no nested scroll trap. Desktop: keep the panel scrolled to latest line.
+    if (window.matchMedia("(max-width: 767px)").matches) return;
+    container.scrollTo({ top: container.scrollHeight, behavior: reduce ? "auto" : "smooth" });
   }, [shown, phase, reduce]);
 
   const filled = useMemo(() => {
@@ -148,7 +151,11 @@ export function CallDemo() {
             </p>
           </div>
 
-          <div role="tablist" aria-label="בחירת תחום לשיחה" className="flex gap-2 rounded-control border border-night-700 bg-night-950 p-1">
+          <div
+            role="tablist"
+            aria-label="בחירת תחום לשיחה"
+            className="flex w-full gap-2 overflow-x-auto overscroll-x-contain rounded-control border border-night-700 bg-night-950 p-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
             {demoCalls.map((item) => {
               const active = item.id === activeId;
               return (
@@ -159,7 +166,7 @@ export function CallDemo() {
                   aria-selected={active}
                   aria-controls="demo-panel"
                   onClick={() => selectCall(item.id)}
-                  className={`relative min-h-11 rounded-chip px-5 text-small font-medium transition-colors duration-100 ${
+                  className={`relative min-h-11 shrink-0 rounded-chip px-5 text-small font-medium transition-colors duration-100 ${
                     active ? "text-night-950" : "text-mist-300 hover:text-mist-100"
                   }`}
                 >
@@ -233,7 +240,13 @@ export function CallDemo() {
               </div>
             </div>
 
-            <div ref={scrollRef} className="h-104 overflow-y-auto px-4 py-5 md:px-6" aria-live="polite" data-lenis-prevent>
+            {/* Mobile: natural height so page scroll continues. md+: fixed panel with inner scroll. */}
+            <div
+              ref={scrollRef}
+              className="px-4 py-5 touch-pan-y md:h-104 md:overflow-y-auto md:overscroll-y-contain md:px-6"
+              aria-live="polite"
+              data-lenis-prevent
+            >
               <ol className="flex flex-col gap-3">
                 <AnimatePresence initial={false}>
                   {call.lines.slice(0, shown).map((line, index) => (

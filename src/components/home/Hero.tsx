@@ -20,11 +20,11 @@ export function Hero({ hasCalendly }: { hasCalendly: boolean }) {
           className="object-cover object-[55%_70%] opacity-35 md:object-[70%_65%] md:opacity-45"
         />
         <div className="absolute inset-0 bg-night-950/82 md:bg-night-950/75" />
-        <div className="hero-ambient absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgb(78_205_196/0.2),transparent_55%)] md:bg-[radial-gradient(ellipse_at_85%_70%,rgb(78_205_196/0.22),transparent_52%)]" />
+        <div className="hero-ambient absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgb(78_205_196/0.2),transparent_55%)] md:bg-[radial-gradient(ellipse_at_80%_70%,rgb(78_205_196/0.22),transparent_52%)]" />
       </div>
 
       {/*
-        Desktop: LTR split — copy ~42% / character ~58%, Hebrew stays RTL.
+        Desktop: text left (~42%), robot right (~58%). Hebrew stays RTL inside copy.
         Mobile: justify-end — copy + CTA then character pinned to the floor.
       */}
       <div
@@ -33,7 +33,7 @@ export function Hero({ hasCalendly }: { hasCalendly: boolean }) {
       >
         <div
           dir="rtl"
-          className="hero-copy relative z-20 flex shrink-0 flex-col px-5 pb-1 pt-6 md:col-span-5 md:col-start-8 md:justify-center md:px-0 md:py-0"
+          className="hero-copy relative z-20 flex shrink-0 flex-col px-5 pb-1 pt-6 md:col-span-5 md:col-start-1 md:justify-center md:px-0 md:py-0"
         >
           <span className="hero-ghost font-latin" aria-hidden="true">
             {hero.ghostWord}
@@ -86,7 +86,7 @@ export function Hero({ hasCalendly }: { hasCalendly: boolean }) {
           </HeroEntrance>
         </div>
 
-        <div className="hero-character relative z-0 h-[42svh] w-full shrink-0 md:col-span-7 md:col-start-1 md:row-start-1 md:h-[min(78svh,40rem)] md:self-end md:-me-4 lg:-me-6">
+        <div className="hero-character relative z-0 h-[42svh] w-full shrink-0 md:col-span-7 md:col-start-6 md:row-start-1 md:h-[min(78svh,40rem)] md:self-end md:-ms-4 lg:-ms-6">
           <div className="hero-character__glow" aria-hidden="true" />
           <div className="hero-character__stage relative mx-auto h-full w-full max-w-[17rem] md:max-w-none">
             <Image

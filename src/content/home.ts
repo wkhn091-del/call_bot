@@ -4,7 +4,7 @@ export const hero = {
   /** Ghost word behind the H1 — atmosphere only, aria-hidden in the component. */
   ghostWord: "21:40",
   title: "השיחה שלא עניתם עליה כבר הלכה",
-  subtitle: "בערב ובסופ״ש CALLBOT עונה בעברית, קובע תור ושולח ליד ל-Monday או Powerlink.",
+  subtitle: "בערב ובסופי שבוע עונה בעברית, קובע תור, ושולח את הליד ישר למערכת שלכם.",
   cta: "לדמו של 15 דקות",
   secondary: "לראות שיחה לדוגמה",
   facts: [
